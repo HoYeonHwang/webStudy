@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>hwfront01</title>
+<style type="text/css">
+.header_nav_title {
+	text-shadow: 5px 5px 3px black;
+	font-size: 60px;
+	font-family: Arial;
+	font-weight: bold;
+	font-style: italic;
+	text-align: center;
+	color: orange
+}
+
+.box {
+	border-bottom-style: solid;
+	border-bottom-color: orange;
+	border-bottom-width: 4px
+}
+
+.input_border {
+	border: solid gray;
+	border-width: 3px 3px 3px 3px;
+	width: 500px;
+	padding: 1em;
+	margin: 0 auto;
+}
+
+legend {
+	color: green;
+}
+
+table {
+	margin-left: auto;
+	margin-right: auto;
+}
+</style>
+</head>
+<body>
+	<!--  ìë¨ í¤ë ìì ë¶ë¶  -->
+	<header>
+		<nav>
+			<div class="box">
+				<p class="header_nav_title">
+					Become a Member</a>
+			</div>
+		</nav>
+	</header>
+	<!--  ìí í¤ë ëëë ë¶ë¶  -->
+
+	<div class="content">
+		<div>
+			<fieldset class="input_border">
+				<legend>Registration Information</legend>
+				<table>
+					<tr>
+						<td><label for="E-Mail">E-Mail :</label></td>
+						<td><input id="E-Mail" type="email" name="email" /></td>
+					</tr>
+					<tr>
+						<td><label for="PASSWORD">Password :</label></td>
+						<td><input id="PASSWORD" type="password" name="password"
+							placeholder="At least 6 letters or numbers" /></td>
+					</tr>
+					<tr>
+						<td><label for="Verify password">Verify password :</label></td>
+						<td><input id="Verify password" type="password"
+							name="V-password"></td>
+					</tr>
+				</table>
+			</fieldset>
+			<fieldset class="input_border">
+				<legend>Member Information</legend>
+				<table>
+					<tr>
+						<td><label for="First Name">First Name :</label></td>
+						<td><input id="First Name" type="text" name="First Name" /></td>
+					</tr>
+					<tr>
+						<td><label for="Last Name">Last Name :</label></td>
+						<td><input id="Last Name" type="text" name="Last Name" /></td>
+					</tr>
+					<tr>
+						<td><label for="Address">Address :</label></td>
+						<td><input id="Address" type="text" name="Address" /></td>
+					</tr>
+					<tr>
+						<td><label for="City">City :</label></td>
+						<td><input id="City" type="text" name="City" /></td>
+					</tr>
+					<tr>
+						<td><label for="State">State :</label></td>
+						<td><input id="State" type="text" name="State"
+							placeholder="2-character code" /></td>
+					</tr>
+					<tr>
+						<td><label for="ZIP Code">ZIP Code :</label></td>
+						<td><input id="ZIP Code" type="text" name="ZIP Code"
+							placeholder="5 or 9 digits/"></td>
+					</tr>
+					<tr>
+						<td><label for="Phone number">Phone number :</label></td>
+						<td><input id="Phone number" type="tel" name="Phone number"
+							placeholder="999-999-9999" /></td>
+					</tr>
+				</table>
+			</fieldset>
+			<fieldset class="input_border">
+				<legend>Membership Information</legend>
+				<table>
+					<tr>
+						<td><label for="Membership Type">Membership Type :</label></td>
+						<td><select id="Membership Type" name="Membership Type">
+								<option value="Junior">Junior</option>
+								<option value="Senior">Senior</option>
+						</select></td>
+					</tr>
+					<tr>
+						<td><label for="Starting Date">Starting Date :</label></td>
+						<td><select id="Starting Date" name="Starting Date">
+								<option value="2020.09.08">2020.09.08</option>
+								<option value="2020.09.09">2020.09.09</option>
+								<option value="2020.09.10">2020.09.10</option>
+								<option value="2020.09.11">2020.09.11</option>
+
+						</select>
+					</tr>
+					<tr>
+						<td><label for="Tickets for Guests">Tickets for
+								Guests :</label></td>
+						<td><select id="Tickets for Guests" name="Tickets for Guests">
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+
+						</select>
+					</tr>
+				</table>
+			</fieldset>
+			<fieldset class="input_border">
+				<legend>Submit Your Membership</legend>
+				<table>
+					<tr>
+						<td><input type="button" value="Submit" /></td>
+						<td><input type="reset" value="Reset Fields" /></td>
+				</table>
+			</fieldset>
+		</div>
+	</div>
+</body>
+</html>
