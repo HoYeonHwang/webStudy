@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ëì _3ë°_í©í¸ì°</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('#header-text').mouseenter(function() {
+			$(this).addClass('fighting');
+		})
+		$('#header-text').mouseleave(function() {
+			$(this).removeClass('fighting');
+		})
+		$('#create').click(function() {
+			var lotto = new Array();
+			var visit = new Array();
+			for (let i = 0; i < 45; i++) {
+				visit[i] = false;
+			}
+			let cnt = 0;
+			while (cnt < 7) {
+				var random = parseInt(Math.random() * 45 + 1);
+				if (visit[random] == false) {
+					lotto.push(random);
+					visit[random] = true;
+					cnt++;
+				}
+			}
+			for (let i = 0; i < 6; i++) {
+				$('li').each(function(idx, element) {
+					$(this).html(lotto[idx]);
+				})
+			}
+			for (let i = 0; i < 6; i++) {
+				$('li').each(function(idx, element) {
+					$(this).addClass('test');
+				})
+			}
+			
+		})
+	})
+</script>
+<style type="text/css">
+* {
+	text-align: center;
+}
+
+.test {
+	animation: fadein 2s;
+	-moz-animation: fadein 2s; /* Firefox */
+	-webkit-animation: fadein 2s; /* Safari and Chrome */
+	-o-animation: fadein 2s; /* Opera */
+}
+
+@
+keyframes fadein {from { opacity:0;
+	
+}
+
+to {
+	opacity: 1;
+}
+
+}
+@
+-moz-keyframes fadein { /* Firefox */ from { opacity:0;
+	
+}
+
+to {
+	opacity: 1;
+}
+
+}
+@
+-webkit-keyframes fadein { /* Safari and Chrome */ from { opacity:0;
+	
+}
+
+to {
+	opacity: 1;
+}
+
+}
+@
+-o-keyframes fadein { /* Opera */ from { opacity:0;
+	
+}
+
+to {
+	opacity: 1;
+}
+
+}
+.fighting {
+	background-color: tomato;
+	color: skyblue;
+}
+
+.content {
+	width: 100px;
+	height: 100px;
+	display: inline-block;
+}
+
+.btlocation {
+	width: 100px;
+	height: 30px;
+	position: absolute;
+	top: 50%;
+	left: 45%;
+}
+
+#create {
+	left: 100px;
+	top: 1050px;
+}
+
+li {
+	display: inline-block;
+	background-color: skyblue;
+	border-radius: 50%;
+}
+
+#list {
+	position: absolute;
+	top: 20%;
+	left: 37%;
+	color: red;
+	font-size: 36px;
+	font-weight: 700;
+	list-style: none;
+	display: inline-block;
+}
+
+body {
+	margin: 0;
+	width: 100%;
+	max-width: 1540px;
+	margin: 10px auto;
+	padding: 20px;
+	background-position: center top;
+	background-image:
+		url("https://dimg.donga.com/wps/NEWS/IMAGE/2019/12/22/98915688.2.jpg");
+	background-repeat: no-repeat;
+	background-size: 1000px;
+	color: rgb(87, 85, 85);
+}
+</style>
+</head>
+<body>
+	<header>
+		<div>
+			<h2 id="header-text">ëë°ì ê¸°ìí©ëë¤~~</h2>
+		</div>
+	</header>
+	<content>
+	<div>
+		<div class="content">
+			<ul id="list">
+				<li> </li>
+				<li> </li>
+				<li> </li>
+				<li> </li>
+				<li> </li>
+				<li> </li>
+			</ul>
+		</div>
+	</div>
+	<div class="btlocation">
+		<button id="create">ë¡ë ìì±ê¸°</button>
+	</div>
+	</content>
+</body>
+</html>
