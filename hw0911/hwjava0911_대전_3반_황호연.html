@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ê³ì°ê¸°_jquary ë²ì </title>
+<style type="text/css">
+button {
+	width: 70px;
+	height: 70px;
+}
+
+#calc {
+	width: 350px;
+	border: 1px solid gray;
+	text-align: center;
+}
+
+#formula {
+	text-align: right;
+	width: 80%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+</style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript">
+	var count = 0;
+	$(function() {
+		var formula = '';
+		var result = '';
+		$('#cal').click(function() {
+			result = eval(formula);
+			console.log(result);
+			$('#result').html(result);
+		});
+		$('.number').click(function() {
+			formula += $(this).html();
+			console.log(formula);
+			$('#formula').val(formula);
+		});
+		$('#clear').click(function() {
+			$('#formula').val('');
+			$('#result').val('');
+			formula='';
+			re='';
+		});
+		
+	})
+</script>
+</head>
+<body>
+	<div id="calc">
+		<input type="text" id="formula" value="" placeholder="0.0"
+			readonly="readonly">
+		<div id="pad">
+			<button class=number>7</button>
+			<button class=number>8</button>
+			<button class=number>9</button>
+			<button class=number>+</button>
+			<button class=number>4</button>
+			<button class=number>5</button>
+			<button class=number>6</button>
+			<button class=number>-</button>
+			<button class=number>1</button>
+			<button class=number>2</button>
+			<button class=number>3</button>
+			<button class=number>*</button>
+			<button class=number>0</button>
+			<button id=clear>CE</button>
+			<button id=cal>=</button>
+			<button class=number>/</button>
+		</div>
+		<div id="resultDiv">
+			<h2>[ê²°ê³¼]</h2>
+			<p id="result"></p>
+		</div>
+	</div>
+</body>
+</html>
