@@ -1,0 +1,6 @@
+CREATE TABLE `ssafyweb`.`product` (
+  `Product_number` INT NOT NULL,
+  `Product_title` VARCHAR(45) NULL,
+  `Product_price` INT NULL,
+  `Product_comment` VARCHAR(45) NULL,
+  PRIMARY KEY (`Product_number`));
