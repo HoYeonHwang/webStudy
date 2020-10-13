@@ -1,0 +1,153 @@
+** ìëì ë¬¸ì ë¤ì (1),(2),(3),(4) ë²ì¼ë¡ ìì±í´ ë³´ì¸ì **
+
+1.ëª¨ë  ì¬ìì ì´ë¦ê³¼ ììë ë¶ìì´ë¦ê³¼ ì§ì­ëªì ì¡°ííìì¤.
+SELECT ENAME,DNAME,LOC FROM emp e, dept d  WHERE e.DEPTNO = d.DEPTNO;
+SELECT ENAME,d.DNAME,d.LOC FROM emp e inner join dept d on e.DEPTNO = d.DEPTNO;
+SELECT ENAME,d.DNAME,d.LOC FROM emp e inner join dept d using (DEPTNO);
+SELECT ENAME,d.DNAME,d.LOC FROM emp e NATURAL join dept d;
+
+2.10ë² ë¶ìì ìíë ëª¨ë  ë´ë¹ ìë¬´(JOB)ë¥¼ ì¤ë³µì´ ìë¤ë©´ íë²ì©ë§ íì, ë¶ìì ì§ì­ëªì í¬í¨íì¬ ì¡°ííìì¤.
+SELECT distinct JOB,LOC FROM emp e, dept d  WHERE e.DEPTNO = d.DEPTNO AND d.DEPTNO = 10;
+SELECT distinct e.JOB,d.LOC FROM emp e inner join dept d on e.DEPTNO = d.DEPTNO WHERE d.DEPTNO = 10;
+SELECT distinct e.JOB,d.LOC FROM emp e inner join dept d USING (DEPTNO) WHERE d.DEPTNO = 10;
+SELECT distinct e.JOB,d.LOC FROM emp e NATURAl join dept d  WHERE d.DEPTNO = 10;
+
+3.ì»¤ë¯¸ìì ë°ë ëª¨ë  ì¬ìì ì´ë¦, ë¶ìëª, ì§ì­ëªì ì¡°ííìì¤.
+SELECT ENAME,DNAME,LOC FROM emp e, dept d  WHERE e.COMM is not null AND e.DEPTNO = d.DEPTNO;
+SELECT e.ENAME,d.DNAME,d.LOC FROM emp e inner join dept d  on e.COMM is not null AND e.DEPTNO = d.DEPTNO;
+SELECT e.ENAME,d.DNAME,d.LOC FROM emp e inner join dept d  USING (DEPTNO) WHERE e.COMM is not null;
+SELECT e.ENAME,d.DNAME,d.LOC FROM emp e NATURAL join dept d  WHERE e.COMM is not null;
+
+4.ì´ë¦ì Aê° í¬í¨ë ëª¨ë  ì¬ìì ì´ë¦ê³¼ ë¶ìëªì ì¡°ííìì¤.
+SELECT ENAME,DNAME FROM emp e, dept d  WHERE ENAME like '%A%' AND e.DEPTNO = d.DEPTNO;
+SELECT e.ENAME,d.DNAME FROM emp e inner join dept d on e.DEPTNO = d.DEPTNO WHERE ENAME like '%A%' ;
+SELECT e.ENAME,d.DNAME FROM emp e inner join dept d USING(DEPTNO) WHERE ENAME like '%A%' ;
+SELECT e.ENAME,d.DNAME FROM emp e NATURAL join dept d WHERE ENAME like '%A%' ;
+
+5.NEW YORKì ê·¼ë¬´íë ëª¨ë  ì¬ìì ì´ë¦, ìë¬´, ë¶ìë²í¸, ë¶ìëªì ì¡°ííìì¤.
+SELECT ENAME,JOB,d.DEPTNO,DNAME FROM emp e, dept d  WHERE e.DEPTNO = d.DEPTNO AND d.LOC='NEW YORK';
+SELECT e.ENAME,e.JOB,d.DEPTNO,d.DNAME FROM emp e inner join dept d  on e.DEPTNO = d.DEPTNO WHERE  d.LOC='NEW YORK';
+SELECT e.ENAME,e.JOB,d.DEPTNO,d.DNAME FROM emp e inner join dept d  USING(DEPTNO) WHERE  d.LOC='NEW YORK';
+SELECT e.ENAME,e.JOB,d.DEPTNO,d.DNAME FROM emp e NATURAL join dept d WHERE  d.LOC='NEW YORK';
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+[SELF ì¡°ì¸ & OUTER ì¡°ì¸ ì°ìµ]
+1. ëª¨ë  ì¬ìì ì¬ë², ì¬ìì´ë¦, ì§ììê´ì ì¬ë², ì§ììê´ì ì´ë¦ì ì¶ë ¥íìì¤.
+  (ë³ì¹­ : ì¬ë², ì´ë¦, ìì¬ì¬ë², ìì¬ì´ë¦)
+>
+SELECT A.EMPNO,A.ENAME,B.EMPNO,B.ENAME
+FROM EMP A JOIN EMP B
+ON A.MGR = B.EMPNO;
+
+2. ëª¨ë  ì§ìì ì´ë¦ê³¼ ë¶ìì´ë¦ì ì¶ë ¥íìì¤
+>
+SELECT A.ENAME,IFNULL(B.DNAME,'ë¶ììì') 'ë¶ìì ë³´'
+FROM EMP A LEFT JOIN DEPT B
+ON A.DEPTNO = B.DEPTNO;
+
+3. ëª¨ë  ë¶ìì ììë ì§ìë¤ì ì ë³´ë¥¼ ì¶ë ¥íìì¤. ë¶ìì´ë¦, ë¶ìë²í¸, ì§ìì´ë¦
+>
+SELECT B.DNAME, B.DEPTNO, A.ENAME
+FROM EMP A RIGHT JOIN DEPT B
+ON A.DEPTNO = B.DEPTNO
+ORDER BY B.DEPTNO;
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+[SUB QUERY ì°ìµë¬¸ì ]
+
+1. ì¬ìë²í¸ê° 7788ì¸ ì¬ìê³¼ ë´ë¹ìë¬´(JOB)ê° ê°ì ì¬ìì ì°¾ìì ì¬ìì´ë¦ê³¼ ë´ë¹ìë¬´ë¥¼ ì¶ë ¥íìì¤.
+SELECT ENAME,JOB
+FROM EMP
+WHERE JOB = (SELECT JOB FROM EMP WHERE EMPNO=7788);
+
+2. ì¬ìë²í¸ê° 7499ì¸ ì¬ìë³´ë¤ ê¸ì¬ê° ë§ì ì¬ìì ì°¾ìì ì¬ì ì´ë¦ê³¼ ë´ë¹ìë¬´ì ê¸ì¬ë¥¼ ì¶ë ¥íìì¤.
+SELECT ENAME,SAL
+FROM EMP
+WHERE SAL > (SELECT SAL FROM EMP WHERE EMPNO=7499);
+
+
+*ìë¸ ì¿¼ë¦¬ì ì¤í ê²°ê³¼ê° ì¬ë¬ê°ì íì¼ë¡ ëíëë ê²½ì°
+SELECT AVG(SAL) FROm EMP GROUP BY DEPTNO;  -- ë¶ìë³ íê·  ê¸ì¬ ì¡°í
+* ì´ ìë¸ì¿¼ë¦¬ë¥¼ WHERE ì¡°ê±´ì ì°ê³  ì¶ìëë IN,ANY,ALL ì¬ì©íë©´ ë¨ (ê°ë¤ or í¬ë¤,ìë¤)
+
+
+3. 30ë² ë¶ìì ììë ì§ìë¤ ì¤ ì´ë¦ì Aê° ë¤ì´ê°ë ì§ìì ì´ë¦ê³¼ ë¶ìì´ë¦ì ì¡°ííìì¤. 
+SELECT
+    CCC.ENAME, CCC.DNAME
+FROM
+    (SELECT * FROM EMP A JOIN DEPT B USING(DEPTNO)) CCC
+WHERE
+    DEPTNO=30 AND ENAME LIKE '%A%';
+
+
+BONUS. ê° ë¶ìë³ ìµì ê¸ì¬ë¥¼ ë°ë ì§ìì ì´ë¦ê³¼ ë¶ìë²í¸ì ê¸ì¬ë¥¼ ì¶ë ¥íìì¤.
+SELECT e.ENAME,d.DEPTNO,e.SAL
+FROM emp e left JOIN dept d
+on e.DEPTNO = d.DEPTNO
+WHERE e.SAL in (SELECT MIN(SAL) FROM emp GROUP BY DEPTNO);
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+1) 30ë² ë¶ìì ìí ì¬ìì ì´ë¦ê³¼ ë¶ìë²í¸ ê·¸ë¦¬ê³  ë¶ìì´ë¦ì ì¶ë ¥íë¼.
+>
+SELECT e.ENAME,d.DEPTNO FROM emp e INNER JOIN dept d on e.DEPTNO=d.DEPTNO WHERE d.DEPTNO = 30;
+
+2) 30ë² ë¶ìì ìí ì¬ìë¤ì ëª¨ë  ì§ìê³¼ ë¶ììì¹ë¥¼ ì¶ë ¥íë¼. (ë¨, ì§ì ëª©ë¡ì´ ì¤ë³µëì§ ìê² íë¼.)
+>
+SELECT distinct e.JOB,d.LOC FROM emp e INNER JOIN dept d on e.DEPTNO=d.DEPTNO WHERE d.DEPTNO = 30;
+
+3) ì»¤ë¯¸ìì´ ì±ì ëì´ ìë ëª¨ë  ì¬ìì ì´ë¦, ë¶ìì´ë¦ ë° ìì¹ë¥¼ ì¶ë ¥íë¼.
+>
+SELECT e.ENAME,d.DNAME,d.LOC FROM emp e INNER JOIN dept d on e.DEPTNO= d.DEPTNO WHERE e.COMM is not null;
+
+4) ì´ë¦ì Aê° ë¤ì´ê°ë ëª¨ë  ì¬ìì ì´ë¦ê³¼ ë¶ì ì´ë¦ì ì¶ë ¥íë¼.
+>
+SELECT e.ENAME,d.DNAME FROM emp e inner join dept d on e.DEPTNO = d.DEPTNO WHERE ENAME like '%A%' ;
+
+5) Dallasìì ê·¼ë¬´íë ëª¨ë  ì¬ìì ì´ë¦, ì§ì, ë¶ìë²í¸ ë° ë¶ìì´ë¦ì ì¶ë ¥íë¼.
+>
+SELECT e.ENAME,e.JOB,d.DEPTNO,d.DNAME FROM emp e inner join dept d on e.DEPTNO = d.DEPTNO WHERE d.LOC ='Dallas' ;
+
+6) ì¬ìì´ë¦ ë° ì¬ìë²í¸, í´ë¹ ê´ë¦¬ìì´ë¦ ë° ê´ë¦¬ì ë²í¸ë¥¼ ì¶ë ¥íë, ê° ì»¬ë¼ëªì employee,emp#,manager,mgr#ì¼ë¡ íìíì¬ ì¶ë ¥íë¼.
+>
+SELECT e.ENAME as 'employee' ,e.EMPNO as 'emp#',ee.ENAME as 'manager',ee.EMPNO as 'mgr#' FROM emp e inner join emp ee  WHERE e.MGR= ee.EMPNO ;
+
+7) ëª¨ë  ì¬ìì ì´ë¦,ì§ì,ë¶ìì´ë¦,ê¸ì¬ ë° ë±ê¸ì ì¶ë ¥íë¼.
+>
+SELECT e.ENAME,e.JOB,d.DNAME,e.SAL,s.GRADE FROM emp e, dept d , salgrade s WHERE e.DEPTNO = d.DEPTNO AND e.SAL between s.LOSAL AND s.HISAL;
+
+8) Smithë³´ë¤ ë¦ê² ìì¬í ì¬ìì ì´ë¦ ë° ìì¬ì¼ì ì¶ë ¥íë¼.
+>
+SELECT e.ENAME,e.HIREDATE FROM emp e WHERE e.HIREDATE >(SELECT HIREDATE FROM emp WHERE ENAME ='SMITH');
+
+9) ìì ì ê´ë¦¬ìë³´ë¤ ë¨¼ì  ìì¬í ëª¨ë  ì¬ìì ì´ë¦, ìì¬ì¼, ê´ë¦¬ìì ì´ë¦, ê´ë¦¬ìì ìì¬ì¼ì ì¶ë ¥íë ê°ê° ì»¬ë¼ëªì Employee,EmpHiredate, Manager,MgrHiredateë¡ íìíì¬ ì¶ë ¥íë¼.
+>
+SELECT e.ENAME AS "Employee", e.HIREDATE AS "EmpHIredate",ee.ENAME AS "Manager",ee.HIREDATE AS "MgrHiredate" FROM emp e, emp ee WHERE e.MGR=ee.EMPNO AND e.HIREDATE<ee.HIREDATE;
+
+10) Smithì ëì¼í ë¶ìì ìí ëª¨ë  ì¬ìì ì´ë¦ ë° ìì¬ì¼ì ì¶ë ¥íë¼. ë¨, Smithë ì ì¸íê³  ì¶ë ¥íìì¤
+>
+SELECT e.ENAME , e.HIREDATE FROM emp e WHERE DEPTNO in (SELECT DEPTNO FROM emp WHERE ENAME ='Smith') AND e.ENAME !='SMITH';
+
+11) ìì ì ê¸ì¬ê° íê·  ê¸ì¬ë³´ë¤ ë§ì ëª¨ë  ì¬ìì ì¬ì ë²í¸, ì´ë¦, ê¸ì¬ë¥¼ íìíë ì§ìë¥¼ ìì±íê³  ê¸ì¬ë¥¼ ê¸°ì¤ì¼ë¡ ê²°ê³¼ë¥¼ ë´ë¦¼ì°¨ìì¼ë¡ ì ë ¬íë¼.
+>
+SELECT e.EMPNO, e.ENAME, e.SAL FROM emp e WHERE e.SAL>(SELECT AVG(SAL) FROM EMP) ORDER BY SAL desc;
+
+12) ì´ë¦ì Tê° ë¤ì´ê°ë ì¬ìì ìí ë¶ììì ê·¼ë¬´íë ëª¨ë  ì¬ìì ì¬ìë² í¸ ë° ì´ë¦ì ì¶ë ¥íë¼.
+>
+SELECT e.EMPNO, e.ENAME FROM emp e WHERE e.JOB IN (SELECT JOB FROM emp WHERE ENAME LIKE '%T%');
+
+13) ìì ì ê¸ì¬ê° íê·  ê¸ì¬ë³´ë¤ ë§ê³  ì´ë¦ì Tê° ë¤ì´ê°ë ì¬ìê³¼ ëì¼í ë¶ìì ê·¼ë¬´íë ëª¨ë  ì¬ìì ì¬ì ë²í¸, ì´ë¦ ë° ê¸ì¬ë¥¼ ì¶ë ¥íë¼.
+>
+SELECT e.EMPNO, e.ENAME,e.SAL FROM emp e WHERE e.SAL > (SELECT AVG(SAL) FROM emp) AND e.ENAME IN (SELECT ENAME FROM emp WHERE ENAME LIKE '%T%');
+
+14) ì§ìì´ Clerk ì¸ ì¬ìë¤ë³´ë¤ ë ë§ì ê¸ì¬ë¥¼ ë°ë ì¬ìì ì¬ìë²í¸, ì´ ë¦, ê¸ì¬ë¥¼ ì¶ë ¥íë, ê²°ê³¼ë¥¼ ê¸ì¬ê° ëì ìì¼ë¡ ì ë ¬íë¼.
+>
+SELECT e.EMPNO,e.ENAME,e.SAL FROM emp e WHERE e.SAL in (SELECT SAL FROM emp WHERE JOB = 'Clerk') ORDER BY SAL desc;
+
+15) New  York ìì ê·¼ë¬´íë ì¬ìê³¼ ê¸ì¬ ë° ì»¤ë¯¸ìì´ ê°ì ì¬ìì ì¬ìì´ ë¦ê³¼ ë¶ìëªì ì¶ë ¥íë¼.
+>
+SELECT e.ENAME,e.JOB FROM emp e WHERE e.COMM in (SELECT COMM FROM emp INNER JOIN dept on emp.DEPTNO=dept.DEPTNO WHERE LOC='New York') AND e.SAL in (SELECT SAL FROM emp INNER JOIN dept on emp.DEPTNO=dept.DEPTNO WHERE LOC='New York');
