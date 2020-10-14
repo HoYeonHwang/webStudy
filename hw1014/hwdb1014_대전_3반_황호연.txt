@@ -1,0 +1,18 @@
+1) âDianaâ ì¬ìê³¼ ê°ì ì§ë¬´ì¸ ì¬ìì ì¬ë²(employee_id), ì´ë¦(first_name), ì§ë¬´(job_id), ë¶ìë²í¸(department_id), ë¶ìì´ë¦(department_name)ì ì¶ë ¥í ì¸ì.
+>
+SELECT e.employee_id, e.first_name, e.job_id,e.department_id,d.department_name FROM employees e INNER JOIN departments d on e.department_id = d.department_id WHERE e.department_id = (select department_id FROM employees WHERE first_name='Diana');
+
+2) âBruceâì ê°ì ë§¤ëì ì¸ ì¬ìì ì ë³´ë¥¼ inline viewë¡ ì¬ì©íì¬ ìëì ê²°ê³¼ë¥¼ ì¶ë ¥íì¸ì. ì¬ë², ì´ë¦, ì§ë¬´ì´ë¦, ë¶ìì´ë¦ì ì¶ë ¥.
+>
+SELECT eee.employee_id,eee.first_name,eee.job_title,eee.department_name
+FROM (SELECT ee.employee_id,ee.first_name,ee.job_title,d.department_name,ee.manager_id FROM 
+(SELECT e.employee_id,e.first_name,jjj.job_title,jjj.department_id,e.manager_id FROM 
+(SELECT j.job_title,jj.employee_id,jj.department_id,j.job_id FROM 
+jobs j INNER JOIN job_history jj on j.job_id=jj.job_id) jjj 
+INNER JOIN employees e on e.job_id = jjj.job_id)ee
+INNER JOIN departments d on ee.department_id = d.department_id)eee
+WHERE eee.manager_id in (SELECT manager_id FROM employees WHERE first_name ='Bruce'); 
+
+3)ëª¨ë  ì¬ìì ìì¬ì¼ ìì¼ë¡ ì ë ¬íê³  ê°ì¥ ì¤ëë ìì¼ë¡ 6ë²ì§¸ë¶í° 10ë²ì§¸ê¹ì§ ì¬ìì ì ë³´ë¥¼ ì¶ë ¥íì¸ì.
+>
+SELECT employee_id, first_name,hire_date FROM employees ORDER by hire_date asc limit 5,5;
