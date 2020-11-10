@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body> 
+    <div id="app">
+        <h2>ì¬ì ëª©ë¡</h2>
+        <table border="1">
+            <th>ì¬ì ìì´ë</th>
+            <th>ì¬ìëª</th>
+            <th>ë¶ì</th>
+            <th>ì§ì±</th>
+            <th>ì°ë´</th>
+            <tr v-for="e in emps">
+                <td><a v-bind:href="e.id | makeLink" >{{e.id}}</a></td>
+                <td>{{e.name}}</td>
+                <td>{{e.deptName}}</td>
+                <td>{{e.title}}</td>
+                <td>{{e.salary}}</td>
+            </tr>
+        </table>
+    </div>
+    
+    <script>
+        
+        const emps = [{
+                id: "1",
+                name: "ë°êµ¬ê³¤",
+                deptName: "ì¸ì¬ë¶",
+                title: "ì¬ì¥",
+                salary: "60000"
+            },
+            {
+                id: "18",
+                name: "ìì ì£¼",
+                deptName: "ê¸°íë¶",
+                title: "ì¬ì",
+                salary: "13000"
+
+            },
+            {
+                id: "19",
+                name: "ìì°½í",
+                deptName: "ê¸°íë¶",
+                title: "ì¬ì",
+                salary: "678"
+            },
+            {
+                id: "20",
+                name: "ì¤ì ì",
+                deptName: "ê¸°íë¶",
+                title: "ì¬ì",
+                salary: "750"
+            },
+            {
+                id: "21",
+                name: "ì¥íì² ",
+                deptName: "ê¸°íë¶",
+                title: "ì¬ì",
+                salary: "8500"
+            },
+            {
+                id: "23",
+                name: "ê°ì°ë²",
+                deptName: "ììë¶",
+                title: "ì¬ì",
+                salary: "795"
+            },
+            {
+                id: "24",
+                name: "ì¤ìê²½",
+                deptName: "ê¸°íë¶",
+                title: "ì¬ì",
+                salary: "860"
+            },
+            {
+                id: "27",
+                name: "ì¥ê¸¸ì°",
+                deptName: "ììë¶",
+                title: "ê³¼ì¥",
+                salary: "12345"
+            },
+            {
+                id: "28",
+                name: "ì¥ì·¨ì°",
+                deptName: "ììë¶",
+                title: "ì¬ì",
+                salary: "23244"
+            },
+            {
+                id: "29",
+                name: "ê¹ìì",
+                deptName: "ê¸°íë¶",
+                title: "ì¬ì",
+                salary: "20000"
+            },
+            {
+                id: "30",
+                name: "ì¥ì¼ë´",
+                deptName: "ì¸ì¬ë¶",
+                title: "ì¬ì",
+                salary: "10000"
+            },
+            {
+                id: "31",
+                name: "ë°±ìì ",
+                deptName: "ì¸ì¬ë¶",
+                title: "ì¬ì",
+                salary: "20000"
+            },
+            {
+                id: "33",
+                name: "ì¡°íì±",
+                deptName: "íê³ë¶",
+                title: "ì¬ì",
+                salary: "1500"
+            }
+        ]
+    </script>
+    <script>
+        new Vue({
+            el :'#app',
+            data : {
+                emps : emps
+            },
+            filters :{
+                makeLink(param){
+                    return "hrm_detail.html?id="+param;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
