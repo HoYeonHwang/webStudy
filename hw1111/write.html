@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="//unpkg.com/bootstrap@4/dist/css/bootstrap.min.css"
+    />
+    <script src="//unpkg.com/jquery@3/dist/jquery.min.js"></script>
+    <script src="//unpkg.com/popper.js@1/dist/umd/popper.min.js"></script>
+    <script src="//unpkg.com/bootstrap@4/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <title>ì¬ìë±ë¡</title>
+
+    <style>
+      #app {
+        width: 500px;
+        height: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h2 style="text-align: center">SSAFY HRM ADD EMPLOEE</h2>
+      <table>
+        <tr>
+          <td>ì´ë¦</td>
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              aria-label="Large"
+              aria-describedby="inputGroup-sizing-sm"
+              id="name"
+              v-model="newEmp.name"
+              placeholder="ì¬ìëªì ìë ¥íì¸ì"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>ì´ë©ì¼</td>
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              aria-label="Large"
+              aria-describedby="inputGroup-sizing-sm"
+              id="email"
+              v-model="newEmp.email"
+              placeholder="ì´ë©ì¼ì ìë ¥íì¸ì"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>ê³ ì©ì¼</td>
+          <td>
+            <input
+              type="date"
+              class="form-control"
+              aria-label="Large"
+              aria-describedby="inputGroup-sizing-sm"
+              id="date"
+              v-model="newEmp.date"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>ê´ë¦¬ì</td>
+          <td>
+            <select id="date" v-model="newEmp.super">
+              <option disabled value="">ì í</option>
+              <option value="ì¬ì¥">ì¬ì¥</option>
+              <option value="ê¸°íë¶ì¥">ê¸°íë¶ì¥</option>
+              <option value="ììë¶ì¥">ììë¶ì¥</option>
+              <option value="ì¢ë¬´ë¶ì¥">ì¢ë¬´ë¶ì¥</option>
+              <option value="ì¸ì¬ë¶ì¥">ì¸ì¬ë¶ì¥</option>
+              <option value="ê³¼ì¥">ê³¼ì¥</option>
+              <option value="ììëíì´ì¬">ììëíì´ì¬</option>
+              <option value="ì¬ì">ì¬ì</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>ì§ì±</td>
+          <td>
+            <select id="job" v-model="newEmp.job">
+              <option disabled value="">ì í</option>
+              <option value="ì¬ì¥">ì¬ì¥</option>
+              <option value="ê¸°íë¶ì¥">ê¸°íë¶ì¥</option>
+              <option value="ììë¶ì¥">ììë¶ì¥</option>
+              <option value="ì¢ë¬´ë¶ì¥">ì¢ë¬´ë¶ì¥</option>
+              <option value="ì¸ì¬ë¶ì¥">ì¸ì¬ë¶ì¥</option>
+              <option value="ê³¼ì¥">ê³¼ì¥</option>
+              <option value="ììëíì´ì¬">ììëíì´ì¬</option>
+              <option value="ì¬ì">ì¬ì</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>ë¶ì</td>
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              aria-label="Large"
+              aria-describedby="inputGroup-sizing-sm"
+              id="dep"
+              v-model="newEmp.dep"
+              placeholder="ë¶ìëªì ìë ¥íì¸ì"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>ìê¸</td>
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              aria-label="Large"
+              aria-describedby="inputGroup-sizing-sm"
+              id="sal"
+              v-model="newEmp.sal"
+              placeholder="ìê¸ì ìë ¥íì¸ì"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td>ì»¤ë¯¸ì</td>
+          <td>
+            <input
+              type="text"
+              class="form-control"
+              aria-label="Large"
+              aria-describedby="inputGroup-sizing-sm"
+              id="com"
+              v-model="newEmp.com"
+              placeholder="ì»¤ë¯¸ìì ìë ¥íì¸ì"
+            />
+          </td>
+        </tr>
+      </table>
+      <br />
+      <div style="text-align: center">
+        <button type="button" class="btn btn-primary" @click="add">ë±ë¡</button>
+        <button
+          type="button"
+          class="btn btn-warning"
+          onclick="location.href='list.html'"
+        >
+          ëª©ë¡
+        </button>
+      </div>
+    </div>
+
+    <script>
+      let emps = localStorage.getItem('emps');
+      emps = JSON.parse(emps);
+
+      new Vue({
+        el: '#app',
+        data: {
+          emps: emps,
+          newEmp: {
+            id: 0,
+            name: '',
+            email: '',
+            date: '',
+            super: '',
+            job: '',
+            dep: '',
+            sal: '',
+            com: '',
+          },
+        },
+        methods: {
+          add() {
+            let newid = 0;
+            for (var i = 0; i < this.emps.length; i++) {
+              if (this.emps[i].id >= newid) {
+                newid = this.emps[i].id + 1; // ìë¡ ìì±íë ê¸ë²í¸ë 1í°ê±°ë¡!
+              }
+            }
+
+            this.newEmp.id = newid;
+            this.emps.push(this.newEmp);
+
+            localStorage.setItem('emps', JSON.stringify(this.emps));
+            alert('ë±ë¡ëììµëë¤.');
+            location.href = 'list.html';
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

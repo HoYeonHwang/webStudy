@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="//unpkg.com/bootstrap@4/dist/css/bootstrap.min.css"
+    />
+    <script src="//unpkg.com/jquery@3/dist/jquery.min.js"></script>
+    <script src="//unpkg.com/popper.js@1/dist/umd/popper.min.js"></script>
+    <script src="//unpkg.com/bootstrap@4/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <style>
+      #app {
+        width: 500px;
+        height: 500px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app" style="text-align: center">
+      <h2>ì¬ìëª©ë¡</h2>
+      <input type="text" placeholder="ì¬ìì ê²ìíì¸ì" v-model="param" />
+      <button class="btn btn-warning" v-on:click="search(param)">ê²ì</button>
+      <table class="table table-striped table-bordered">
+        <thead class="table-primary">
+          <tr>
+            <th scope="col">ì¬ì ìì´ë</th>
+            <th scope="col">ì¬ìëª</th>
+            <th scope="col">ë¶ì</th>
+            <th scope="col">ì§ì±</th>
+            <th scope="col">ì°ë´</th>
+          </tr>
+        </thead>
+        <tbody id="tbody">
+          <tr v-for="e in newEmp">
+            <th scope="row">{{e.id}}</th>
+            <td>{{e.name}}</td>
+            <td>{{e.dep}}</td>
+            <td>{{e.job}}</td>
+            <td>{{e.sal}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <button
+        type="button"
+        class="btn btn-primary"
+        onclick="location.href='write.html'"
+      >
+        ë±ë¡
+      </button>
+    </div>
+    <script>
+      let emps = localStorage.getItem('emps');
+      let newEmp;
+      emps = JSON.parse(emps);
+      let today = new Date();
+      if (emps == null || emps.length == 0) {
+        // ë¡ì»¬ì¤í ë¦¬ì§ì ì ì¥ëê±° ìì¼ë©´ ìíì°ê¸°
+        emps = [
+          {
+            id: 3,
+            name: 'ì¥íì² ',
+            eamil: 'ssafy@ssafy.com',
+            date: today,
+            dep: 'ê¸°íë¶',
+            super: 'ì¬ì¥',
+            job: 'ì¬ì',
+            sal: '700',
+            com: '100',
+          },
+          {
+            id: 2,
+            name: 'ì¥ê¸¸ì°',
+            eamil: 'ssafy@ssafy.com',
+            date: today,
+            dep: 'ììë¶',
+            super: 'ì¬ì¥',
+            job: 'ê³¼ì¥',
+            sal: '1000',
+            com: '100',
+          },
+          {
+            id: 1,
+            name: 'ì ì·¨ì ',
+            eamil: 'ssafy@ssafy.com',
+            date: today,
+            dep: 'ììë¶',
+            super: 'ì¬ì',
+            job: 'ì¬ì',
+            sal: '900',
+            com: '100',
+          },
+        ];
+        localStorage.setItem('emps', JSON.stringify(emps));
+      }
+      new Vue({
+        el: '#app',
+        data: {
+          emps: emps,
+          newEmp: [],
+          param: '',
+        },
+        methods: {
+          search: function (param) {
+            $('#tbody').empty();
+            for (let i = 0; i < this.emps.length; i++) {
+              if (this.emps[i].name.includes(param)) {
+                this.newEmp.push(this.emps[i]);
+              }
+            }
+          },
+        },
+        mounted() {
+          $('#tbody').empty();
+          for (let i = 0; i < this.emps.length; i++) {
+            this.newEmp.push(this.emps[i]);
+          }
+        },
+      });
+    </script>
+  </body>
+</html>
